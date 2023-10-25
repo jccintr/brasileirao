@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "brasileirao",
+    "name": "Brasileirão",
     "slug": "brasileirao",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jccintr.brasileirao"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "999da53d-22d8-4e94-9850-a77532113ebc"
+      }
     }
   }
 }
