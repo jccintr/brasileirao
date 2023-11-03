@@ -2,8 +2,10 @@ import { StyleSheet, Text,TouchableOpacity,FlatList} from 'react-native';
 import React, {useState,} from 'react';
 import { cores } from '../theme';
 import NetWorkImage from './reusable/NetWorkImage';
+import { useTheme } from '@react-navigation/native';
 
 const EquipesList = ({onSelectEquipe,equipes,select,setSelect}) => {
+    const {colors,darkMode} = useTheme();
     
   return (
     <FlatList
@@ -15,7 +17,7 @@ const EquipesList = ({onSelectEquipe,equipes,select,setSelect}) => {
             return (
                 <TouchableOpacity style={[styles.container,index===select?styles.containerSelected:'']} onPress={() =>{setSelect(index);onSelectEquipe(item.team_key)}}>
                     <NetWorkImage height={50} width={50} source={item.team_badge}/>
-                    <Text style={{color:index===select?cores.black:cores.black}}>{item.team_name}</Text>
+                    <Text style={{color:colors.text}}>{item.team_name}</Text>
                 </TouchableOpacity>
             );
         }}
@@ -40,7 +42,6 @@ const styles = StyleSheet.create({
      
     },
     containerSelected:{
-     //backgroundColor: cores.blue,
      borderWidth: 2,
      borderColor: cores.blue,
     }

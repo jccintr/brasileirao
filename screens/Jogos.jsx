@@ -1,6 +1,7 @@
 import { StyleSheet, FlatList, View,ActivityIndicator, TouchableOpacity, StatusBar } from 'react-native';
 import React, {useState,useEffect} from 'react';
 import { cores } from '../theme';
+import { useTheme } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AssetImage from '../components/reusable/AssetImage';
 import WidthSpacer from '../components/reusable/WidthSpacer';
@@ -14,6 +15,7 @@ import Separator from '../components/reusable/Separator';
 import Meses from '../components/Meses';
 
 const Jogos = () => {
+  const {colors,darkMode} = useTheme();
   const [isLoading,setIsLoading] = useState(false);
   const [jogos,setJogos] = useState([]);
   const [month,setMonth] = useState(new Date().getMonth()+1);
@@ -116,16 +118,16 @@ const onSelectMonth = (month) => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-        <StatusBar animated={true} backgroundColor={cores.white} barStyle="dark-content"/>
+    <SafeAreaView style={[styles.container,{backgroundColor: colors.background}]}>
+        <StatusBar animated={true} backgroundColor={colors.background} barStyle={darkMode?'light-content':'dark-content'}/>
         <View style={reusable.rowWithSpace('space-between')}>
               <View style={{flexDirection:'row',alignItems:'center'}}>
                   <AssetImage mode={'contain'} width={40} height={40}  source={(require('../assets/logo445.png'))}/>
                   <WidthSpacer w={5}/>
-                  <ReusableText text={'Brasileirão 2023'} size={20} color={cores.blue} />
+                  <ReusableText text={'Brasileirão 2023'} size={20} color={colors.title} />
               </View>
-              {isLoading?<ActivityIndicator size={'large'} color={cores.blue}/>:<TouchableOpacity onPress={()=>{getJogos(month)}}>
-                  <Feather name="refresh-cw" size={26} color={cores.blue} />
+              {isLoading?<ActivityIndicator size={'large'} color={colors.title}/>:<TouchableOpacity onPress={()=>{getJogos(month)}}>
+                  <Feather name="refresh-cw" size={26} color={colors.title} />
               </TouchableOpacity>}
         </View>
         <HeightSpacer h={5}/>

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { cores } from '../../theme';
 import NetWorkImage from '../reusable/NetWorkImage';
 import HeightSpacer from '../reusable/HeightSpacer';
+import { useTheme } from '@react-navigation/native';
 
 const diaSemana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']
 
@@ -26,6 +27,7 @@ const tempoJogo = (status) => {
 }
 
 const CardPartida2 = ({item}) => {
+  const {colors,darkMode} = useTheme();
 
   const formataData = (strData) => {
     const splitData = strData.split('-');
@@ -36,20 +38,20 @@ const CardPartida2 = ({item}) => {
   return (
     <View style={styles.container}>
       {item.match_status=='Postponed'?<Text style={{fontWeight:'bold',color:cores.blue}}>Partida Adiada</Text>:
-      <Text style={{fontWeight:'bold',color:cores.blue}}>{formataData(item.match_date)} {item.match_time}</Text>}
+      <Text style={{fontWeight:'bold',color:colors.title}}>{formataData(item.match_date)} {item.match_time}</Text>}
       <HeightSpacer h={10} />
       <View style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:'100%'}}>
 
         <View style={{alignItems:'center',width:100}}>
             <NetWorkImage height={50} width={50} source={item.team_home_badge}/>
             <HeightSpacer h={5}/>
-            <Text>{item.match_hometeam_name}</Text>
+            <Text style={{color:colors.text}}>{item.match_hometeam_name}</Text>
         </View>
 
         {item.match_status==='Finished'&&<View style={{flexDirection:'row', alignItems:'center',justifyContent:'space-between',width:60}}>
-            <Text style={styles.scoreText}>{item.match_hometeam_score}</Text>
-            <Text style={{fontSize:14,fontWeight:'bold'}}>X</Text>
-            <Text style={styles.scoreText}>{item.match_awayteam_score}</Text>
+            <Text style={[styles.scoreText,{color:colors.text}]}>{item.match_hometeam_score}</Text>
+            <Text style={{fontSize:14,fontWeight:'bold',color:colors.text}}>X</Text>
+            <Text style={[styles.scoreText,{color:colors.text}]}>{item.match_awayteam_score}</Text>
         </View>}
 
         {(item.match_status!=='Finished'&&item.match_status.length>0&&item.match_status!=='Postponed')&&
@@ -58,9 +60,9 @@ const CardPartida2 = ({item}) => {
                   <Text style={styles.liveText}>EM ANDAMENTO</Text>
                </View>
                <View style={{flexDirection:'row', alignItems:'center',justifyContent:'space-between',width:60}}>
-                   <Text style={styles.scoreText}>{item.match_hometeam_score}</Text>
-                   <Text style={{fontSize:14,fontWeight:'bold'}}>X</Text>
-                   <Text style={styles.scoreText}>{item.match_awayteam_score}</Text>
+                   <Text style={[styles.scoreText,{color:colors.text}]}>{item.match_hometeam_score}</Text>
+                   <Text style={{fontSize:14,fontWeight:'bold',color:colors.text}}>X</Text>
+                   <Text style={[styles.scoreText,{color:colors.text}]}>{item.match_awayteam_score}</Text>
                </View>
                <View style={styles.time}>
                   <Text style={styles.timeText}>{tempoJogo(item.match_status)}</Text>
@@ -73,7 +75,7 @@ const CardPartida2 = ({item}) => {
         <View style={{alignItems:'center',width:100}}>
             <NetWorkImage height={50} width={50} source={item.team_away_badge}/>
             <HeightSpacer h={5}/>    
-            <Text>{item.match_awayteam_name}</Text>
+            <Text style={{color:colors.text}}>{item.match_awayteam_name}</Text>
         </View>
       </View>
     </View>

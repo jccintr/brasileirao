@@ -1,6 +1,7 @@
 import { StyleSheet, FlatList, View,ActivityIndicator, TouchableOpacity, StatusBar,Text } from 'react-native';
 import React, {useState,useEffect} from 'react';
 import { cores } from '../theme';
+import { useTheme } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AssetImage from '../components/reusable/AssetImage';
 import WidthSpacer from '../components/reusable/WidthSpacer';
@@ -13,6 +14,7 @@ import CardPartida2 from '../components/cards/CardPartida2';
 import Separator from '../components/reusable/Separator';
 
 const Live = () => {
+  const {colors,darkMode} = useTheme();
   const [isLoading,setIsLoading] = useState(false);
   const [jogos,setJogos] = useState([]);
   const [month,setMonth] = useState(new Date().getMonth()+1);
@@ -102,34 +104,22 @@ const Live = () => {
    setIsLoading(false);
 }
 
-// const lastday = (y,m) => {
-//   return  new Date(y, m , 0).getDate();
-//   }
-
-// const onSelectRodada = (rodada) => {
-//      getJogos(rodada);
-// }
-
-// const onSelectMonth = (month) => {
-//   getJogos(month.id,lastday(2023,month.id));
-// }
-
 
   return (
-    <SafeAreaView style={styles.container}>
-        <StatusBar animated={true} backgroundColor={cores.white} barStyle="dark-content"/>
+    <SafeAreaView style={[styles.container,{backgroundColor: colors.background}]}>
+        <StatusBar animated={true} backgroundColor={colors.background} barStyle={darkMode?'light-content':'dark-content'}/>
         <View style={reusable.rowWithSpace('space-between')}>
               <View style={{flexDirection:'row',alignItems:'center'}}>
                   <AssetImage mode={'contain'} width={40} height={40}  source={(require('../assets/logo445.png'))}/>
                   <WidthSpacer w={5}/>
-                  <ReusableText text={'Brasileirão 2023'} size={20} color={cores.blue} />
+                  <ReusableText text={'Brasileirão 2023'} size={20} color={colors.title} />
               </View>
-              {isLoading?<ActivityIndicator size={'large'} color={cores.blue}/>:<TouchableOpacity onPress={()=>{getJogos()}}>
-                  <Feather name="refresh-cw" size={26} color={cores.blue} />
+              {isLoading?<ActivityIndicator size={'large'} color={colors.title}/>:<TouchableOpacity onPress={()=>{getJogos()}}>
+                  <Feather name="refresh-cw" size={26} color={colors.title} />
               </TouchableOpacity>}
         </View>
         <HeightSpacer h={5}/>
-        {jogos.length===0&&<Text style={{textAlign:'center',color:cores.blue,position:'absolute',left:5,right:5,top:'50%',}}>Não há jogos ao vivo neste momento.</Text>}
+        {jogos.length===0&&<Text style={{textAlign:'center',color:colors.title,position:'absolute',left:5,right:5,top:'50%',}}>Não há jogos ao vivo neste momento.</Text>}
          {jogos.length>0&&<FlatList
             data={jogos}
             showsVerticalScrollIndicator={false}
@@ -146,7 +136,7 @@ export default Live
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: cores.white,
+    
     flex:1,
     paddingTop: 10,
     paddingHorizontal:15,

@@ -12,9 +12,11 @@ import { Feather } from '@expo/vector-icons';
 import Separator from '../components/reusable/Separator';
 import EquipesList from '../components/EquipesList';
 import CardPartida2 from '../components/cards/CardPartida2';
+import { useTheme } from '@react-navigation/native';
 
 
 const Equipes = () => {
+    const {colors,darkMode} = useTheme();
     const [equipes,setEquipes] = useState([]);
     const [isLoading,setIsLoading] = useState(false);
     const [select, setSelect] = useState(null);
@@ -132,21 +134,21 @@ const Equipes = () => {
     }
 
   return (
-    <SafeAreaView style={styles.container}>
-            <StatusBar animated={true} backgroundColor={cores.white} barStyle="dark-content"/>
+    <SafeAreaView style={[styles.container,{backgroundColor: colors.background}]}>
+            <StatusBar animated={true} backgroundColor={colors.background} barStyle={darkMode?'light-content':'dark-content'}/>
             <View style={reusable.rowWithSpace('space-between')}>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <AssetImage mode={'contain'} width={40} height={40}  source={(require('../assets/logo445.png'))}/>
                     <WidthSpacer w={5}/>
-                    <ReusableText text={'Brasileirão 2023'} size={20} color={cores.blue} />
+                    <ReusableText text={'Brasileirão 2023'} size={20} color={colors.title} />
                 </View>
-                {isLoading?<ActivityIndicator size={'large'} color={cores.blue}/>:<TouchableOpacity onPress={()=>getEquipes()}>
-                    <Feather name="refresh-cw" size={26} color={cores.blue} />
+                {isLoading?<ActivityIndicator size={'large'} color={colors.title}/>:<TouchableOpacity onPress={()=>getEquipes()}>
+                    <Feather name="refresh-cw" size={26} color={colors.title} />
                 </TouchableOpacity>}
             </View>
             <HeightSpacer h={5}/>
             <EquipesList equipes={equipes} onSelectEquipe={onSelectEquipe} select={select} setSelect={setSelect}/>
-            {select===null&&<Text style={{textAlign:'center',color:cores.blue,position:'absolute',left:5,right:5,top:'50%',}}>Selecione uma equipe para exibir os seus jogos.</Text>}
+            {select===null&&<Text style={{textAlign:'center',color:colors.title,position:'absolute',left:5,right:5,top:'50%',}}>Selecione uma equipe para exibir os seus jogos.</Text>}
             <HeightSpacer h={10} />
             {jogos.length>0&&!isLoading&&<FlatList
                 data={jogos}
@@ -165,7 +167,6 @@ export default Equipes
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: cores.white,
       flex:1,
       paddingTop: 10,
       paddingHorizontal:15,

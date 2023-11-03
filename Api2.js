@@ -1,6 +1,7 @@
 
 const BASE_API = 'https://apiv3.apifootball.com';
-const API_KEY = '940fe7558f3d066356bda1d3531dd3b627ce4f2d8d715114ab1d80d07c93fd91';
+//const API_KEY = '940fe7558f3d066356bda1d3531dd3b627ce4f2d8d715114ab1d80d07c93fd91';
+const API_KEY = '512387f1ca94508bfdc2510ed811375fda7a7d12b090a2ba893b3e8e31b4c442';
 export default {
 
     getTable: async () => {
@@ -35,7 +36,7 @@ export default {
         let json = await response.json();
         let jogos = [];
         for(let i=0;i<json.length;i++){
-            if(json[i].match_status.trim().length>0 && json[i].match_status.trim().length<=3){
+            if( (json[i].match_status.trim().length>0 && json[i].match_status.trim().length<=3) || json[i].match_status=='Half Time'  ){
                 jogos.push(json[i]);
             }
         }

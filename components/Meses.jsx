@@ -1,11 +1,11 @@
 import { StyleSheet, Text,TouchableOpacity,FlatList} from 'react-native';
 import React, {useState,useEffect,useRef} from 'react';
 import { cores } from '../theme';
+import { useTheme } from '@react-navigation/native';
 
 
 const Meses = ({onSelectMonth,month}) => {
-   // const flatListRef =useRef()
-  // console.log(month);
+  const {colors,darkMode} = useTheme();
     const [select, setSelect] = useState(month-4);
     
     const meses = [
