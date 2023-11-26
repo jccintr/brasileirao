@@ -1,7 +1,7 @@
 
 const BASE_API = 'https://apiv3.apifootball.com';
 //const API_KEY = '940fe7558f3d066356bda1d3531dd3b627ce4f2d8d715114ab1d80d07c93fd91';
-const API_KEY = '512387f1ca94508bfdc2510ed811375fda7a7d12b090a2ba893b3e8e31b4c442';
+const API_KEY = 'bb8fa1e4ce8401d09d7da0682cda1444cd8ed58bd7319c20abda09de21769629';
 export default {
 
     getTable: async () => {

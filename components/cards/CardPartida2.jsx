@@ -65,7 +65,7 @@ const CardPartida2 = ({item}) => {
                    <Text style={[styles.scoreText,{color:colors.text}]}>{item.match_awayteam_score}</Text>
                </View>
                <View style={styles.time}>
-                  <Text style={styles.timeText}>{tempoJogo(item.match_status)}</Text>
+                  <Text style={[styles.timeText,{color:colors.text}]}>{tempoJogo(item.match_status)}</Text>
                </View>
           </View>
         }
@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
   },
   timeText:{
     fontSize: 12,
-    color:cores.black,
     fontWeight:'bold',
   }
 })
