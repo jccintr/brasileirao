@@ -32,6 +32,16 @@ const Equipes = () => {
         let json = await Api.getJogosByEquipe(idEquipe);
         for (let i=0;i<json.length;i++){
 
+          if(json[i].match_hometeam_id=='1929'){
+            json[i].match_hometeam_name = 'Atlético-GO';
+            }
+          if(json[i].match_hometeam_id=='1802'){
+            json[i].match_hometeam_name = 'Criciúma';
+            }
+            if(json[i].match_hometeam_id=='1748'){
+              json[i].match_hometeam_name = 'Vitória';
+              }
+
           if(json[i].match_hometeam_id=='2015'){
             json[i].match_hometeam_name = 'RB Bragantino';
           }
@@ -66,6 +76,15 @@ const Equipes = () => {
             json[i].match_hometeam_name = 'Goiás';
           }
           //=========================
+          if(json[i].match_awayteam_id=='1929'){
+            json[i].match_awayteam_name = 'Atlético-GO';
+          }
+          if(json[i].match_awayteam_id=='1802'){
+            json[i].match_awayteam_name = 'Criciúma';
+          }
+          if(json[i].match_awayteam_id=='1748'){
+            json[i].match_awayteam_name = 'Vitória';
+          }
           if(json[i].match_awayteam_id=='2015'){
             json[i].match_awayteam_name = 'RB Bragantino';
           }
@@ -110,6 +129,16 @@ const Equipes = () => {
        let json = await Api.getEquipes();
        json.sort((a,b) => (a.team_name > b.team_name) ? 1 : ((b.team_name > a.team_name) ? -1 : 0));
        for(let i=0;i<json.length;i++){
+
+            if(json[i].team_key=='1929'){
+              json[i].team_name = 'Atlético-GO'
+            }
+            if(json[i].team_key=='1748'){
+              json[i].team_name = 'Vitória'
+            }
+            if(json[i].team_key=='1802'){
+              json[i].team_name = 'Criciúma'
+            }
            
             if(json[i].team_name=='América Mineiro'){
               json[i].team_name = 'América-MG';
@@ -140,7 +169,7 @@ const Equipes = () => {
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <AssetImage mode={'contain'} width={40} height={40}  source={(require('../assets/logo445.png'))}/>
                     <WidthSpacer w={5}/>
-                    <ReusableText text={'Brasileirão 2023'} size={20} color={colors.title} />
+                    <ReusableText text={'Brasileirão 2024'} size={20} color={colors.title} />
                 </View>
                 {isLoading?<ActivityIndicator size={'large'} color={colors.title}/>:<TouchableOpacity onPress={()=>getEquipes()}>
                     <Feather name="refresh-cw" size={26} color={colors.title} />

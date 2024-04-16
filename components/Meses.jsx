@@ -12,26 +12,26 @@ const Meses = ({onSelectMonth,month}) => {
     {
       id:4,
       nome:'Abril',
-      start:'2023-04-01',
-      end:'2023-04-30'
+      start:'2024-04-01',
+      end:'2024-04-30'
     },
     {
         id:5,
         nome:'Maio',
-        start:'2023-05-01',
-        end:'2023-05-31'
+        start:'2024-05-01',
+        end:'2024-05-31'
       },
       {
         id:6,
         nome:'Junho',
-        start:'2023-06-01',
-        end:'2023-06-30'
+        start:'2024-06-01',
+        end:'2024-06-30'
       },
       {
         id:7,
         nome:'Julho',
-        start:'2023-07-01',
-        end:'2023-07-31'
+        start:'2024-07-01',
+        end:'2024-07-31'
       },
       {
         id:8,
@@ -42,26 +42,26 @@ const Meses = ({onSelectMonth,month}) => {
       {
         id:9,
         nome:'Setembro',
-        start:'2023-09-01',
-        end:'2023-09-30'
+        start:'2024-09-01',
+        end:'2024-09-30'
       },
       {
         id:10,
         nome:'Outubro',
-        start:'2023-10-01',
-        end:'2023-10-31'
+        start:'2024-10-01',
+        end:'2024-10-31'
       },
       {
       id:11,
       nome:'Novembro',
-      start:'2023-11-01',
-      end:'2023-11-30'
+      start:'2024-11-01',
+      end:'2024-11-30'
     },
     {
         id:12,
         nome:'Dezembro',
-        start:'2023-12-01',
-        end:'2023-12-31'
+        start:'2024-12-01',
+        end:'2024-12-31'
       },
 ]
 
