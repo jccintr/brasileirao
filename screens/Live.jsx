@@ -1,5 +1,5 @@
 import { StyleSheet, FlatList, View,ActivityIndicator, TouchableOpacity, StatusBar,Text } from 'react-native';
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,useContext} from 'react';
 import { cores } from '../theme';
 import { useTheme } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,12 +12,14 @@ import HeightSpacer from '../components/reusable/HeightSpacer';
 import { Feather } from '@expo/vector-icons';
 import CardPartida2 from '../components/cards/CardPartida2';
 import Separator from '../components/reusable/Separator';
+import { ApiKeyContext } from '../context/ApiKeyContext';
 
 const Live = () => {
   const {colors,darkMode} = useTheme();
   const [isLoading,setIsLoading] = useState(false);
   const [jogos,setJogos] = useState([]);
   const [month,setMonth] = useState(new Date().getMonth()+1);
+  const {apiKey} = useContext(ApiKeyContext);
 
   useEffect(()=>{
     getJogos();
@@ -27,7 +29,7 @@ const Live = () => {
    setIsLoading(true);
    let hoje = new Date();
    
-   let json = await Api.getJogosLive(hoje.getDate(),hoje.getMonth()+1);
+   let json = await Api.getJogosLive(hoje.getDate(),hoje.getMonth()+1,apiKey);
    
    for (let i=0;i<json.length;i++){
 

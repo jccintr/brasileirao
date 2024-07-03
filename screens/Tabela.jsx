@@ -1,5 +1,5 @@
-import { StyleSheet, FlatList, View,ActivityIndicator, TouchableOpacity, StatusBar,Text } from 'react-native';
-import React, {useState,useEffect} from 'react';
+import { StyleSheet, FlatList, View,ActivityIndicator, TouchableOpacity, StatusBar } from 'react-native';
+import React, {useState,useEffect,useContext} from 'react';
 import { cores } from '../theme';
 import { useTheme } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,6 +12,9 @@ import CardTable2 from '../components/cards/CardTable2';
 import HeightSpacer from '../components/reusable/HeightSpacer';
 import { Feather } from '@expo/vector-icons';
 import Separator from '../components/reusable/Separator';
+import { FontAwesome5 } from '@expo/vector-icons';
+import ModalChave from '../components/ModalChave';
+import { ApiKeyContext } from '../context/ApiKeyContext';
 
 
 
@@ -19,6 +22,8 @@ const Tabela = () => {
   const {colors,darkMode} = useTheme();
   const [isLoading,setIsLoading] = useState(false);
   const [tabela,setTabela] = useState([]);
+  const [modalVisible,setModalVisible] = useState(false);
+  const {apiKey} = useContext(ApiKeyContext);
   
   useEffect(()=>{
      getTabela2();
@@ -28,7 +33,7 @@ const Tabela = () => {
 
 const getTabela2 = async () => {
   setIsLoading(true);
-  let json = await Api.getTable();
+  let json = await Api.getTable(apiKey);
 
   for(let i=0;i<json.length;i++){
 
@@ -85,9 +90,14 @@ const getTabela2 = async () => {
                 <WidthSpacer w={5}/>
                 <ReusableText text={'Brasileirão 2024'} size={20} color={colors.title} />
             </View>
-            {isLoading?<ActivityIndicator size={'large'} color={colors.title}/>:<TouchableOpacity onPress={onRefreshTable}>
-                <Feather name="refresh-cw" size={26} color={colors.title} />
-            </TouchableOpacity>}
+            <View style={{flexDirection: 'row', gap:10,alignItems:'center'}}>
+                <TouchableOpacity onPress={()=>setModalVisible(true)}>
+                      <FontAwesome5 name="key" size={20} color={colors.title} />
+                </TouchableOpacity>
+                {isLoading?<ActivityIndicator size={'large'} color={colors.title}/>:<TouchableOpacity onPress={onRefreshTable}>
+                    <Feather name="refresh-cw" size={26} color={colors.title} />
+                </TouchableOpacity>}
+            </View>
       </View>
       <HeightSpacer h={10} />
       <FlatList
@@ -99,6 +109,7 @@ const getTabela2 = async () => {
                 <CardTable2 item={item}/>
             )}
           />
+       <ModalChave visible={modalVisible} setVisible={setModalVisible} />
  </SafeAreaView>
   )
 }

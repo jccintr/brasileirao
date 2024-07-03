@@ -1,5 +1,5 @@
 import { StyleSheet, FlatList, View,ActivityIndicator, TouchableOpacity, StatusBar,Text } from 'react-native';
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,useContext} from 'react';
 import { cores } from '../theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AssetImage from '../components/reusable/AssetImage';
@@ -13,6 +13,7 @@ import Separator from '../components/reusable/Separator';
 import EquipesList from '../components/EquipesList';
 import CardPartida2 from '../components/cards/CardPartida2';
 import { useTheme } from '@react-navigation/native';
+import { ApiKeyContext } from '../context/ApiKeyContext';
 
 
 const Equipes = () => {
@@ -21,6 +22,7 @@ const Equipes = () => {
     const [isLoading,setIsLoading] = useState(false);
     const [select, setSelect] = useState(null);
     const [jogos,setJogos] = useState([]);
+    const {apiKey} = useContext(ApiKeyContext);
 
 
     useEffect(()=>{
@@ -29,7 +31,7 @@ const Equipes = () => {
 
       const getJogos = async (idEquipe) => {
         setIsLoading(true);
-        let json = await Api.getJogosByEquipe(idEquipe);
+        let json = await Api.getJogosByEquipe(idEquipe,apiKey);
         for (let i=0;i<json.length;i++){
 
           if(json[i].match_hometeam_id=='1929'){
@@ -126,7 +128,7 @@ const Equipes = () => {
     
      const getEquipes = async () => {
        setIsLoading(true);
-       let json = await Api.getEquipes();
+       let json = await Api.getEquipes(apiKey);
        json.sort((a,b) => (a.team_name > b.team_name) ? 1 : ((b.team_name > a.team_name) ? -1 : 0));
        for(let i=0;i<json.length;i++){
 

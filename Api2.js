@@ -1,11 +1,12 @@
 
 const BASE_API = 'https://apiv3.apifootball.com';
+//jcpda4@gmail.com zodiac 
 //const API_KEY = '940fe7558f3d066356bda1d3531dd3b627ce4f2d8d715114ab1d80d07c93fd91';
-const API_KEY = '72669601a6074dffb7236ff76c989f9d18ca46f01fca314c55efc86bd28d0b0f';
+const API_KEY = '21c8b21cb7b397fd1f833a6dfbf0cebe71a486213f2094931d477df9407fa84c';
 export default {
 
-    getTable: async () => {
-        const response = await fetch(`${BASE_API}/?action=get_standings&league_id=99&APIkey=${API_KEY}`, {
+    getTable: async (key) => {
+        const response = await fetch(`${BASE_API}/?action=get_standings&league_id=99&APIkey=${key}`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
@@ -15,8 +16,8 @@ export default {
         return response.json();
     },
     
-    getJogos: async (month,lastDay) => {
-        const response = await fetch(`${BASE_API}/?action=get_events&from=2024-${month}-01&to=2024-${month}-${lastDay}&league_id=99&APIkey=${API_KEY}&timezone=America/Bahia`, {
+    getJogos: async (month,lastDay,key) => {
+        const response = await fetch(`${BASE_API}/?action=get_events&from=2024-${month}-01&to=2024-${month}-${lastDay}&league_id=99&APIkey=${key}&timezone=America/Bahia`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
@@ -26,8 +27,8 @@ export default {
         return response.json();
     },
 
-    getJogosLive: async (day,month) => {
-        const response = await fetch(`${BASE_API}/?action=get_events&from=2024-${month}-${day}&to=2024-${month}-${day}&league_id=99&APIkey=${API_KEY}&timezone=America/Bahia`, {
+    getJogosLive: async (day,month,key) => {
+        const response = await fetch(`${BASE_API}/?action=get_events&from=2024-${month}-${day}&to=2024-${month}-${day}&league_id=99&APIkey=${key}&timezone=America/Bahia`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
@@ -43,8 +44,8 @@ export default {
         return jogos;
     },
 
-    getEquipes: async () => {
-        const response = await fetch(`${BASE_API}/?action=get_teams&league_id=99&APIkey=${API_KEY}`, {
+    getEquipes: async (key) => {
+        const response = await fetch(`${BASE_API}/?action=get_teams&league_id=99&APIkey=${key}`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
@@ -54,8 +55,8 @@ export default {
         return response.json();
     },
 
-    getJogosByEquipe: async (equipeId) => {
-        const response = await fetch(`${BASE_API}/?action=get_events&from=2024-04-01&to=2024-12-10&league_id=99&APIkey=${API_KEY}&timezone=America/Bahia&team_id=${equipeId}`, {
+    getJogosByEquipe: async (equipeId,key) => {
+        const response = await fetch(`${BASE_API}/?action=get_events&from=2024-04-01&to=2024-12-10&league_id=99&APIkey=${key}&timezone=America/Bahia&team_id=${equipeId}`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
